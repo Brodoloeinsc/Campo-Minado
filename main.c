@@ -1,20 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Declarando as Structs
 int criarCampo(int campo[9][9]);
-
 int criarBombas(int campo[9][9], int bombas[9][2]);
-
 int mostrarCampos(int campo[9][9]);
+int result(resultado);
 
+// Função Principal
 int main(){
-
-    // 0 ponto vazio
-    // 1 ponto com bomba
-    // 2 ponto marcado préviamente
 
     int j, i, campo[9][9], bombas[9][2], resultado = 0, x, y, vitoria = 0;
 
+    // Criando o campo completo
     criarCampo(campo);
 
     criarBombas(campo, bombas);
@@ -22,15 +20,17 @@ int main(){
     printf("O Campo esta zerado, onde voce deseja jogar?\n");
 
     do{
-        
+        // Criando o Jogo
         mostrarCampos(campo);
 
+        // Fazendo a jogada
         printf("Coordenadas X >>>");
         scanf("%d", &x);
 
         printf("Coordenadas Y >>>");
         scanf("%d", &y);
 
+        // Conferindo o jogo
         if(campo[x][y] == 1){
             resultado = 1;
         }else if(campo[x][y] == 2){
@@ -40,20 +40,21 @@ int main(){
             vitoria += 1;
         }
 
+        // Vendo se o jogo acabou
         if(vitoria ==  81){
             resultado = 2;
         }
     }while(resultado == 0);
 
-    if(resultado == 1){
-        printf("Nao foi dessa vez, porem tente novamente da proxima vez\n");
-    }else if(resultado == 2){
-        printf("Parabens, voce ganhou o jogo, deseja jogar novamente?\n");
-    }
+    // Conferindo o resultado
+    result(resultado);
 
     return 0;
 }
 
+// Funções do Jogo
+
+// Gera o Campo Limpo
 int criarCampo(int campo[9][9]){
     int i, j;
     for(i = 0; i < 9; i++){
@@ -63,6 +64,7 @@ int criarCampo(int campo[9][9]){
     }
 }
 
+// Coloca bombas no campo
 int criarBombas(int campo[9][9], int bombas[9][2]){
     int i;
 
@@ -78,6 +80,7 @@ int criarBombas(int campo[9][9], int bombas[9][2]){
     }
 }
 
+// Mostra o campo com as marcações
 int mostrarCampos(int campo[9][9]){
     int i, j;
     
@@ -92,5 +95,14 @@ int mostrarCampos(int campo[9][9]){
             }
         }
         printf("\n   -------------------\n");
+    }
+}
+
+// Conferindo o Resultado
+int result(int resultado){
+    if(resultado == 1){
+        printf("Nao foi dessa vez, porem tente novamente da proxima vez\n");
+    }else if(resultado == 2){
+        printf("Parabens, voce ganhou o jogo, deseja jogar novamente?\n");
     }
 }
